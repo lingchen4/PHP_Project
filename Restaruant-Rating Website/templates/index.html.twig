@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/food/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+  <title>Main Page</title>
+  <style>
+    .bg-pink {
+      background-color: rgb(255, 255, 255);
+    }
+
+    .cate-menu .active {
+      color: #e91e63;
+      border-bottom: 2px solid #e91e63;
+    }
+  </style>
+</head>
+
+<body style="background-color: #eee;">
+  <!-- Part 1 Nav bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-pink font-weight-bold">
+    <a class="navbar-brand text-white bg-danger border-danger rounded-pill" href="/food">{{ name }}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <nav class="navbar navbar-light bg-pink ml-lg-auto mx-md-0 px-md-0">
+        <form class="form-inline">
+          <input class="form-control mr-sm-0" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </nav>
+      <ul class="navbar-nav ml-auto mr-5">
+        <li class="nav-item active">
+          <a class="nav-link text-danger" href="#">Food <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-danger" href="#">Ranking</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-danger" href="#">Comment</a>
+        </li>
+        <li class=" ml-lg-5 nav-item ">
+          <a class="nav-link text-danger" href="#"><i class="fas fa-users"></i></a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Part 2 Search div -->
+
+
+  <!-- Part 3 Banner -->
+  <div class="container-fluid p-0 position-relative">
+    <img src="/food/img/banner.jpg" class="w-100" alt="sample-image" />
+    <div class="position-absolute" style="left: 5rem; bottom: 3rem;">
+      <h2 class="text-white">Restaruant Name</h2>
+      <p class="text-white">
+        <span class="mr-4">Location</span> |
+        <span>
+          Operating hour:
+        </span>
+      </p>
+      <button class="btn bg-red text-white">View Info</button>
+    </div>
+    <div class="position-absolute border border-secondary rounded p-2" style="right: 5rem; bottom: 3rem;">
+      <p>
+        <span class="text-white">Rating</span>
+        <span class="text-secondary ml-2" style="font-size: 0.7rem;">based on 2000 views
+        </span>
+      </p>
+      <p class="text-white">Score: 3.4</p>
+    </div>
+  </div>
+  <!-- Part 4 Movie list -->
+  <div class="container-fluid">
+    <!-- Part 4.1 Category Menu -->
+    <div class="row my-3 mx-4 cate-menu">
+      <div class="col-12">
+        <div class="container-fluid">
+          <div class="row text-secondary text-center" style="border-bottom: 1px solid #ccc; line-height: 2.4rem;">
+            {% for id, name in categories %}
+            <div class="col-lg-1 col-md-2">
+              <a class="text-danger font-weight-bold" href="/food/genre/get/{{id}}">{{name}}</a>
+            </div>
+            {% endfor %}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Part 4.2 List -->
+  <div class="row mx-4 px-4">
+    {% for restaruant in restaruants %}
+    <div class="col-lg-4 col-md-6 my-2">
+      <div class="card">
+        <a href="/food/restaruant/get/{{restaruant.id}}">
+          <img class="card-img-top w-100" style="min-height: 300px;" src="{{ restaruant.widget_url }}" alt="..." />
+        </a>
+        <div class="card-body">
+          <div class="float-right border border-danger rounded p-1 bg-light " style="color: #e91e63;">
+            {{( restaruant.total_score / restaruant.score_number) | number_format(1,'.',',')}}
+          </div>
+          <h5 class="card-title p-0" style="min-height: 1.8rem;">
+            {{ restaruant.name }}
+          </h5>
+          <p class=" " style="font-size: 1.1rem;">
+            {% set genres = restaruant.genre | split(',') %}
+            {% for ge in genres %}
+            <a class="mr-2 badge badge-danger text-wrap" href="/food/genre/get/{{ge}}">{{categories[ge]}}</a>
+            {% endfor %}
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="./js/bootstrap.bundle.min.js"></script>
+  <script src="./js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/9499696e71.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
