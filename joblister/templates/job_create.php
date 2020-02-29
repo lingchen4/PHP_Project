@@ -1,7 +1,7 @@
 <?php include 'inc/header.php'; ?>
 
 <h2 class="page-header">Create Job Listing</h2>
-<form method="post" action="create">
+<form method="post" action="create.php">
     <div class="form-group">
         <label for="">Company</label>
         <input type="text" class="form-control" name="company">

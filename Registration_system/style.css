@@ -1,0 +1,14 @@
+form {
+  width: 300px;
+}
+
+form label {
+  padding: 10px 20px;
+  display: inline-block;
+  width: 60px;
+}
+
+button {
+  width: 4rem;
+  margin: 20px 50%;
+}
